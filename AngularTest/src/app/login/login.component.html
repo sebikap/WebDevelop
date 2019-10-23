@@ -1,0 +1,23 @@
+<form [formGroup]="loginForm" (ngSubmit)="doLogin()">
+  <div>
+    <label>Email</label>
+    <input [ngClass]="{error:loginForm.get('email').hasError('required') && loginForm.get('email').dirty, warning:loginForm.get('email').hasError('email') && loginForm.get('email').dirty}"
+      type="email" formControlName="email">
+  </div>
+  <div *ngIf="loginForm.get('email').errors && loginForm.get('email').dirty">
+    <p *ngIf="loginForm.get('email').hasError('email')">El campo es obligatorio</p>
+    <p *ngIf="loginForm.get('password').hasError('email')">Debe tener formato correcto</p>
+  </div>
+
+  <div>
+    <label>Password</label>
+    <input [ngClass]="{error:loginForm.get('password').hasError('required') && loginForm.get('password').dirty, warning:loginForm.get('password').hasError('minLength') && loginForm.get('password').dirty}"
+      type="text" formControlName="password">
+  </div>
+  <div *ngIf="loginForm.get('password').errors && loginForm.get('password').dirty">
+    <p *ngIf="loginForm.get('password').hasError('required')">El campo es obligatorio</p>
+    <p *ngIf="loginForm.get('password').hasError('minLength')">Debe tener minimo 5 caracteres</p>
+  </div>
+
+  <button type="submit">Enviar</button>
+</form>
